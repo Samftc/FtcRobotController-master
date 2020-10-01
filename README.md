@@ -1,3 +1,5 @@
+Aloha Everyone,
+
 This is where the code for the Crossroads Robotics team is going to be.
 
 Below is a copy-and-paste of the ultimate goal sdk read me
