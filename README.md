@@ -1,3 +1,7 @@
+This is where the code for the Crossroads Robotics team is going to be.
+
+Below is a copy-and-paste of the ultimate goal sdk read me
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the Ultimate Goal (2020-2021) competition season.
