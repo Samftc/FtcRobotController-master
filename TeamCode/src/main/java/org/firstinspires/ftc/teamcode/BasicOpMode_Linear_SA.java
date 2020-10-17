@@ -53,7 +53,7 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
 //Disabled
 public class BasicOpMode_Linear_SA extends LinearOpMode {
-
+//type something
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
