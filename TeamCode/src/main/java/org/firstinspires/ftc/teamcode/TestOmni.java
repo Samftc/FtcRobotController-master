@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name = "ArmOmni")
-class TestOmni extends OpMode {
+public class TestOmni extends OpMode {
     DcMotor A;
     DcMotor FL;
     DcMotor BL;
