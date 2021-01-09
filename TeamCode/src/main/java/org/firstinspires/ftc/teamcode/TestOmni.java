@@ -18,7 +18,9 @@ class TestOmni extends OpMode {
     double Power;
     double RunTime;
     double Turn;
-    double Servo;
+    double Left;
+    double Right;
+    double Swivel;
     double Arm;
 
     @Override
@@ -52,9 +54,9 @@ class TestOmni extends OpMode {
         Turn = 1.5*gamepad1.left_stick_x; //variable is used for turning
 
 
-        HS.setPosition(Servo); // sets the position of the servo
-        HSL.setPosition(Servo);
-        HSR.setPosition(Servo);
+        HS.setPosition(Swivel); // sets the position of the servo
+        HSL.setPosition(Left);
+        HSR.setPosition(Right);
 
         A.setPower(Arm);    //controls the arm motor
 
@@ -66,10 +68,19 @@ class TestOmni extends OpMode {
         BL.setPower(Power -Turn);
 
         if(gamepad1.x){
-            Servo = 0; //sets the servo to closed
+            Left = 0; //sets the servo to closed
+            Right = 180; //sets the servo to open
         }
         else if(gamepad1.b){
-            Servo =  180; //sets the servo to open
+            Left =  180; //sets the servo to open
+            Right = 0; //sets the servo to closed
+        }
+
+        if(gamepad1.y){
+            Swivel = 0; //sets servo to closed
+        }
+        else if(gamepad1.a){
+            Swivel = 180; //sets servo to open
         }
     }
 }
