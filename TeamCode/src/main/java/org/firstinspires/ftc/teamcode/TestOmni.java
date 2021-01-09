@@ -1,3 +1,5 @@
+//Erin Kelley and Sam Bigham 1/9/2021
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -26,6 +28,7 @@ class TestOmni extends OpMode {
     @Override
     public void init() {
 
+
                        /* Motors:
    back_right_motor
    front_right_motor
@@ -39,12 +42,16 @@ class TestOmni extends OpMode {
         A = hardwareMap.dcMotor.get("arm_motor");
         FL = hardwareMap.dcMotor.get("front_left_motor");
         BL = hardwareMap.dcMotor.get("back_left_motor");
-        HS = hardwareMap.servo.get("hand_servo");
-        HSL = hardwareMap.servo.get("hand_servo_left");
-        HSR = hardwareMap.servo.get("hand_servo_right");
+        HS = hardwareMap.servo.get("hand_servo"); //swivel
+        HSL = hardwareMap.servo.get("hand_servo_left"); //claw left
+        HSR = hardwareMap.servo.get("hand_servo_right"); // claw right
 
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        //nulls
+        HSL.setPosition(0);
+        HSR.setPosition(180);
 
     }
 
@@ -52,20 +59,6 @@ class TestOmni extends OpMode {
     public void loop() {
         Power = gamepad1.left_stick_y; //variable for controller power on motors
         Turn = 1.5*gamepad1.left_stick_x; //variable is used for turning
-
-
-        HS.setPosition(Swivel); // sets the position of the servo
-        HSL.setPosition(Left);
-        HSR.setPosition(Right);
-
-        A.setPower(Arm);    //controls the arm motor
-
-        Arm = -gamepad1.right_stick_y;
-
-        BR.setPower(Power +Turn);  //controls movement... forward, backward, left, right
-        FR.setPower(Power +Turn);
-        FL.setPower(Power -Turn);
-        BL.setPower(Power -Turn);
 
         if(gamepad1.x){
             Left = 0; //sets the servo to closed
@@ -82,6 +75,20 @@ class TestOmni extends OpMode {
         else if(gamepad1.a){
             Swivel = 180; //sets servo to open
         }
+
+        HS.setPosition(Swivel); // sets the position of the servo
+        HSL.setPosition(Left);
+        HSR.setPosition(Right);
+
+        A.setPower(Arm);    //controls the arm motor
+
+        Arm = -gamepad1.right_stick_y;
+
+        BR.setPower(Power +Turn);  //controls movement... forward, backward, left, right
+        FR.setPower(Power +Turn);
+        FL.setPower(Power -Turn);
+        BL.setPower(Power -Turn);
+
     }
 }
 
