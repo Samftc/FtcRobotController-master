@@ -22,6 +22,7 @@ public class TestOmni extends OpMode {
     double Turn;
     double Left;
     double Right;
+    double Servo;
     double Swivel;
     double Arm;
 
@@ -50,8 +51,8 @@ public class TestOmni extends OpMode {
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //nulls
-        HSL.setPosition(0);
-        HSR.setPosition(180);
+        HSL.setPosition(Servo);
+        HSR.setPosition(Servo);
 
     }
 
@@ -61,12 +62,10 @@ public class TestOmni extends OpMode {
         Turn = 1.5*gamepad1.left_stick_x; //variable is used for turning
 
         if(gamepad1.x){
-            Left = 0; //sets the servo to closed
-            Right = 180; //sets the servo to open
+            Servo = 0; //sets the servo to closed
         }
         else if(gamepad1.b){
-            Left =  180; //sets the servo to open
-            Right = 0; //sets the servo to closed
+            Servo =  180; //sets the servo to open
         }
 
         if(gamepad1.y){
@@ -77,8 +76,8 @@ public class TestOmni extends OpMode {
         }
 
         HS.setPosition(Swivel); // sets the position of the servo
-        HSL.setPosition(Left);
-        HSR.setPosition(Right);
+        HSL.setPosition(Servo);
+        HSR.setPosition(Servo);
 
         A.setPower(Arm);    //controls the arm motor
 
