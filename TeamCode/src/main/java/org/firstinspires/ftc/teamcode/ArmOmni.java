@@ -15,7 +15,8 @@ public class ArmOmni extends OpMode {
     DcMotor BL;
     DcMotor BR;
     DcMotor FR;
-    com.qualcomm.robotcore.hardware.Servo HS;
+    com.qualcomm.robotcore.hardware.Servo HSL;
+    com.qualcomm.robotcore.hardware.Servo HSR;
     double Power;
     double RunTime;
     double Turn;
@@ -38,7 +39,8 @@ Servos:
         A = hardwareMap.dcMotor.get("arm_motor");
         FL = hardwareMap.dcMotor.get("front_left_motor");
         BL = hardwareMap.dcMotor.get("back_left_motor");
-        HS = hardwareMap.servo.get("hand_servo");
+        HSL = hardwareMap.servo.get("hand_servo_left");
+        HSR = hardwareMap.servo.get("hand_servo_right");
 
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -51,7 +53,8 @@ Servos:
 
 
 
-        HS.setPosition(Servo);  // sets the position of the servo
+        HSL.setPosition(Servo);  // sets the position of the servo
+        HSR.setPosition(Servo);
         A.setPower(Arm);    //controls the arm motor
 
         Arm = -gamepad1.right_stick_y;

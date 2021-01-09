@@ -25,7 +25,7 @@ public class Omni extends OpMode {
     RF = hardwareMap.get(DcMotor.class, "motor4");
     RB = hardwareMap.get(DcMotor.class, "motor3");
 
-    //Seting hardware modes
+    //Setting hardware modes
     RF.Direction(DcMotor.Direction.REVERSE);
     RB.Direction(DcMotor.Direction.REVERSE);
     LF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
