@@ -17,6 +17,8 @@ public class ArmOmni extends OpMode {
     DcMotor FR;
     com.qualcomm.robotcore.hardware.Servo HSL;
     com.qualcomm.robotcore.hardware.Servo HSR;
+    com.qualcomm.robotcore.hardware.Servo HS;
+
     double Power;
     double RunTime;
     double Turn;
