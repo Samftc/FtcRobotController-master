@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import java.util.Map;
+
+//Created by SamB on Monday January 11th 2021
 @TeleOp (name = "Wheels")
 public class Wheels extends OpMode {
 
@@ -16,16 +19,18 @@ public class Wheels extends OpMode {
     com.qualcomm.robotcore.hardware.Servo HS;
     com.qualcomm.robotcore.hardware.Servo HSL;
     com.qualcomm.robotcore.hardware.Servo HSR;
-    double Power;
-    double RunTime;
-    double Turn;
-    double Left;
-    double Right;
-    double Servo;
-    double Swivel;
-    double Arm;
+    double LPower;
+    double RPower;
+    double LOmni;
+    double ROmni;
     @Override
     public void init() {
+
+        //starts telemetry in the phones
+        telemetry.addData("Mode:", "done initializing");
+        telemetry.update();
+
+//crossroads is password
           /* Motors:
   back_right_motor
   front_right_motor
@@ -42,13 +47,34 @@ Servos:
         HSL = hardwareMap.servo.get("hand_servo_left");
         HSR = hardwareMap.servo.get("hand_servo_right");
 
-        BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+        BL.setDirection(DcMotorSimple.Direction.REVERSE);
+        FL.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
 
     }
 
     @Override
     public void loop() {
+        LPower = gamepad1.left_stick_y;
+        RPower = gamepad1.right_stick_y;
+        LOmni = gamepad1. left_stick_x;
+        ROmni = gamepad1. right_stick_x;
+
+
+        BL.setPower(LPower -LOmni);//controls driving motors
+        FL.setPower(LPower -ROmni);
+        BR.setPower(RPower -ROmni);
+        FR.setPower(RPower -LOmni);
+
+
+
+        telemetry.addData("Back Left", LPower - LOmni);//displays info in phones
+        telemetry.addData("Back Right", LPower - LOmni);
+        telemetry.addData("Front Right", RPower - LOmni);
+        telemetry.addData("Front Left", RPower - LOmni);
+
+        //cool equation for mapping numbers just in case Y = (X-A)/(B-A) * (D-C) + C
 
     }
 }

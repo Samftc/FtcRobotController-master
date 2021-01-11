@@ -47,8 +47,8 @@ public class TestOmni extends OpMode {
         HSL = hardwareMap.servo.get("hand_servo_left"); //claw left
         HSR = hardwareMap.servo.get("hand_servo_right"); // claw right
 
-        BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+        BL.setDirection(DcMotorSimple.Direction.REVERSE);
+        FL.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //nulls
         HSL.setPosition(Servo);
@@ -79,7 +79,7 @@ public class TestOmni extends OpMode {
         HSL.setPosition(Servo);
         HSR.setPosition(Servo);
 
-        A.setPower(Arm);    //controls the arm motor
+        A.setPower(-Arm);    //controls the arm motor
 
         Arm = -gamepad1.right_stick_y;
 
