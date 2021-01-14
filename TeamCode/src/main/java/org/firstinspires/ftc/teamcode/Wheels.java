@@ -21,8 +21,11 @@ public class Wheels extends OpMode {
     com.qualcomm.robotcore.hardware.Servo HSR;
     double LPower;
     double RPower;
-    double LOmni;
-    double ROmni;
+    double Left;
+    double turn;
+
+
+
     @Override
     public void init() {
 
@@ -56,23 +59,39 @@ Servos:
 
     @Override
     public void loop() {
+
+
         LPower = gamepad1.left_stick_y;
+
+        Left = gamepad1.left_stick_x;
+
+
+
+
+
+        BL.setPower(LPower +(2 * Left) );//controls driving motors
+        FL.setPower(LPower -(2 * Left) );
+        BR.setPower(LPower -(2 * Left));
+        FR.setPower(LPower +(2 * Left));
+
+
         RPower = gamepad1.right_stick_y;
-        LOmni = gamepad1. left_stick_x;
-        ROmni = gamepad1. right_stick_x;
+        turn = gamepad1.right_stick_x;
 
 
-        BL.setPower(LPower -LOmni);//controls driving motors
-        FL.setPower(LPower -ROmni);
-        BR.setPower(RPower -ROmni);
-        FR.setPower(RPower -LOmni);
+        if(RPower != 0 || turn != 0){
+            BL.setPower(LPower -(2 * turn) );//controls driving motors
+            FL.setPower(LPower -(2 * turn) );
+            BR.setPower(LPower +(2 * turn));
+            FR.setPower(LPower +(2 * turn));
+        }
 
 
 
-        telemetry.addData("Back Left", LPower - LOmni);//displays info in phones
-        telemetry.addData("Back Right", LPower - LOmni);
-        telemetry.addData("Front Right", RPower - LOmni);
-        telemetry.addData("Front Left", RPower - LOmni);
+        telemetry.addData("Back Left", LPower );//displays info in phones
+        telemetry.addData("Back Right", LPower);
+        telemetry.addData("Front Right", RPower);
+        telemetry.addData("Front Left", RPower);
 
         //cool equation for mapping numbers just in case Y = (X-A)/(B-A) * (D-C) + C
 
