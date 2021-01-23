@@ -26,6 +26,8 @@ public class Wheloptel extends OpMode {
     double Servo;
     double up;
     double down;
+    double pos = 0;
+    boolean go = false;
     @Override
     public void init() {
 
@@ -49,6 +51,7 @@ Servos:
         BL = hardwareMap.dcMotor.get("back_left_motor");
         HSL = hardwareMap.servo.get("hand_servo_left");
         HSR = hardwareMap.servo.get("hand_servo_right");
+        HS = hardwareMap.servo.get("hand_servo");
 
         BL.setDirection(DcMotorSimple.Direction.REVERSE);
         FL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -69,7 +72,7 @@ Servos:
 
 
         if (gamepad1.right_bumper){
-            slowmode = 0.5; //slower
+            slowmode = 0.2; //slower
         }
         else if (gamepad1.left_bumper){
             slowmode = 1; //normal
@@ -108,15 +111,37 @@ Servos:
         A.setPower(up - down);
 
         if(gamepad1.x){
-            Servo = 0; //sets the servo to closed
+            HSL.setPosition(30); //sets the servo to closed
+            HSR.setPosition(30);
 
         }
         else if(gamepad1.b){
-            Servo =  180; //sets the servo to open
+            HSL.setPosition(180); //sets the servo to open
+            HSR.setPosition(180);
         }
-        if (gamepad1.x || gamepad1.b){
-            HS.setPosition(Servo);  // sets the position of the servo
+
+
+        HS.setPosition(pos);
+
+        if (!gamepad1.a && go){
+            pos = +1;
+            go = false;
         }
+
+        if (gamepad1.a){
+            go =true;
+
+        }
+        else if(gamepad1.y){
+            go = false;
+        }
+
+        else if (!gamepad1.y && !go){
+            pos = -1;
+            go = true;
+        }
+
+
 
 
 
