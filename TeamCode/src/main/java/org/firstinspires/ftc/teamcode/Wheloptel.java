@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name = "Wheloptel")
 
-class Wheloptel extends OpMode {
+public class Wheloptel extends OpMode {
 
     DcMotor A;
     DcMotor FL;
@@ -21,11 +21,11 @@ class Wheloptel extends OpMode {
     double RPower;
     double Left;
     double turn;
-    double slowmode;
+    double slowmode = 1;
     double Turn;
     double Servo;
-    boolean up;
-    boolean down;
+    double up;
+    double down;
     @Override
     public void init() {
 
@@ -52,6 +52,12 @@ Servos:
 
         BL.setDirection(DcMotorSimple.Direction.REVERSE);
         FL.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
     }
@@ -96,16 +102,10 @@ Servos:
 
 
 
-        HS.setPosition(Servo);  // sets the position of the servo
+        up = gamepad1.right_trigger;
+        down = gamepad1.left_trigger;
 
-        if (up){
-            A.setPower(1);
-        }
-        else if(down){
-            A.setPower(-0.2);
-        }
-
-        up = gamepad1.dpad_up;
+        A.setPower(up - down);
 
         if(gamepad1.x){
             Servo = 0; //sets the servo to closed
@@ -113,6 +113,9 @@ Servos:
         }
         else if(gamepad1.b){
             Servo =  180; //sets the servo to open
+        }
+        if (gamepad1.x || gamepad1.b){
+            HS.setPosition(Servo);  // sets the position of the servo
         }
 
 
