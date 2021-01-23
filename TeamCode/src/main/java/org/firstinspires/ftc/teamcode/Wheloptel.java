@@ -5,11 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import java.util.Map;
+@TeleOp(name = "Wheloptel")
 
-//Created by SamB on Monday January 11th 2021
-@TeleOp (name = "Wheels")
-public class Wheels extends OpMode {
+class Wheloptel extends OpMode {
 
     DcMotor A;
     DcMotor FL;
@@ -24,9 +22,10 @@ public class Wheels extends OpMode {
     double Left;
     double turn;
     double slowmode;
-
-
-
+    double Turn;
+    double Servo;
+    boolean up;
+    boolean down;
     @Override
     public void init() {
 
@@ -55,11 +54,12 @@ Servos:
         FL.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-
     }
 
     @Override
     public void loop() {
+
+
 
 
         if (gamepad1.right_bumper){
@@ -86,9 +86,6 @@ Servos:
         FR.setPower(LPower +(2 * Left));
 
 
-
-
-
         if(RPower != 0 || turn != 0){
             BL.setPower(LPower -(2 * turn) );//controls driving motors
             FL.setPower(LPower -(2 * turn) );
@@ -98,12 +95,36 @@ Servos:
 
 
 
+
+        HS.setPosition(Servo);  // sets the position of the servo
+
+        if (up){
+            A.setPower(1);
+        }
+        else if(down){
+            A.setPower(-0.2);
+        }
+
+        up = gamepad1.dpad_up;
+
+        if(gamepad1.x){
+            Servo = 0; //sets the servo to closed
+
+        }
+        else if(gamepad1.b){
+            Servo =  180; //sets the servo to open
+        }
+
+
+
+
         telemetry.addData("Back Left", LPower );//displays info in phones
         telemetry.addData("Back Right", LPower);
         telemetry.addData("Front Right", RPower);
         telemetry.addData("Front Left", RPower);
 
         //cool equation for mapping numbers just in case Y = (X-A)/(B-A) * (D-C) + C
+
 
     }
 }
