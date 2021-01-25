@@ -70,14 +70,14 @@ Servos:
         }
 
 
-        LPower = slowmode * gamepad1.left_stick_y;
+        LPower = gamepad1.left_stick_y;
 
-        Left = slowmode * gamepad1.left_stick_x;
+        Left =  gamepad1.left_stick_x;
 
 
-        RPower = slowmode * gamepad1.right_stick_y;
+        RPower =  gamepad1.right_stick_y;
 
-        turn = slowmode * gamepad1.right_stick_x;
+        turn =  gamepad1.right_stick_x;
 
 
         BL.setPower(LPower +(2 * Left) );//controls driving motors

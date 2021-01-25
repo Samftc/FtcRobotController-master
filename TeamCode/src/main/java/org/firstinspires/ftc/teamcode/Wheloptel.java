@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "Wheloptel")
 
@@ -26,7 +27,7 @@ public class Wheloptel extends OpMode {
     double Servo;
     double up;
     double down;
-    double pos = 0;
+    double pos;
     boolean go = false;
     @Override
     public void init() {
@@ -62,11 +63,16 @@ Servos:
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        pos = 0;
+
 
     }
 
     @Override
     public void loop() {
+
+        HS.setPosition(pos);
+
 
 
 
@@ -111,35 +117,26 @@ Servos:
         A.setPower(up - down);
 
         if(gamepad1.x){
-            HSL.setPosition(30); //sets the servo to closed
-            HSR.setPosition(30);
+            HSL.setPosition(00); //sets the servo to closed
+            HSR.setPosition(00);
 
         }
-        else if(gamepad1.b){
+        if(gamepad1.b){
             HSL.setPosition(180); //sets the servo to open
             HSR.setPosition(180);
         }
 
-
-        HS.setPosition(pos);
-
-        if (!gamepad1.a && go){
-            pos = +1;
-            go = false;
-        }
-
-        if (gamepad1.a){
-            go =true;
-
-        }
-        else if(gamepad1.y){
-            go = false;
-        }
-
-        else if (!gamepad1.y && !go){
-            pos = -1;
+        if(!gamepad1.y ){
             go = true;
+
         }
+
+        if(gamepad1.y && go){
+            pos = + 15;
+            go = false;
+        }
+
+
 
 
 
