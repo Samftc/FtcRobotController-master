@@ -61,9 +61,12 @@ Servos:
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        pos = 0;
+        pos = 1;
+        HS.setPosition(pos);
+        HSL.setPosition(0.9);
+        HSR.setPosition(0.1);
 
 
     }
@@ -117,36 +120,52 @@ Servos:
         A.setPower(up - down);
 
         if(gamepad1.x){
-            HSL.setPosition(00); //sets the servo to closed
-            HSR.setPosition(00);
+            HSL.setPosition(0.2); //sets the servo to closed
+            HSR.setPosition(0.2);
 
         }
         if(gamepad1.b){
-            HSL.setPosition(180); //sets the servo to open
-            HSR.setPosition(180);
+            HSL.setPosition(0.8); //sets the servo to open
+            HSR.setPosition(0.8);
         }
 
-        if(!gamepad1.y ){
-            go = true;
-
-        }
 
         if(gamepad1.y && go){
-            pos = + 15;
+            pos = pos + 0.2;
             go = false;
         }
 
 
+        if(gamepad1.a && go){
+            pos = pos - 0.2;
+            go = false;
+        }
+        if (!gamepad1.a && !gamepad1.y){
+
+            if (pos > 1){
+                pos = 1;
+            }
+            else if(pos < 0){
+                pos = 0;
+            }
+
+            go = true;
+        }
 
 
 
 
 
 
-        telemetry.addData("Back Left", LPower );//displays info in phones
-        telemetry.addData("Back Right", LPower);
-        telemetry.addData("Front Right", RPower);
-        telemetry.addData("Front Left", RPower);
+
+
+
+
+        telemetry.addData("Back Left", LPower +(2 * Left) );//displays info in phones
+        telemetry.addData("Front Left",LPower -(2 * Left) );
+        telemetry.addData("Back Right", LPower -(2 * Left));
+        telemetry.addData("Front Right", LPower +(2 * Left));
+        telemetry.addData("pos", pos);
 
         //cool equation for mapping numbers just in case Y = (X-A)/(B-A) * (D-C) + C
 
