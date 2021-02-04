@@ -63,11 +63,13 @@ Servos:
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        pos = 1;
+      /*  pos = 1;
         HS.setPosition(pos);
         HSL.setPosition(0.9);
         HSR.setPosition(0.1);
 
+*/
+        pos = 0;
 
     }
 
@@ -120,13 +122,13 @@ Servos:
         A.setPower(up - down);
 
         if(gamepad1.x){
-            HSL.setPosition(0.2); //sets the servo to closed
+            HSL.setPosition(0.8); //sets the servo to open
             HSR.setPosition(0.2);
 
         }
         if(gamepad1.b){
-            HSL.setPosition(0.8); //sets the servo to open
-            HSR.setPosition(0.8);
+            HSL.setPosition(0.0); //sets the servo to closed
+            HSR.setPosition(1);
         }
 
 
