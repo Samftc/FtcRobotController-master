@@ -85,11 +85,12 @@ public class EasyAuto extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, 60, 60, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED, -12, -12, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        //need to get it to strafe left
-        encoderDrive(DRIVE_SPEED, 72, 72, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED, -72, -72, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 30, 30, 10.0);  // forward
+        encoderDrive(TURN_SPEED, -9, 9, 4.0);  // turn left
+        encoderDrive(TURN_SPEED, 12, 12, 4.0);  // little bit forward
+        encoderDrive(TURN_SPEED, 9, -9, 4.0);  // turn right
+        encoderDrive(DRIVE_SPEED, 20, 20, 4.0);  // forward
+        encoderDrive(DRIVE_SPEED, -20, -20, 8.0);  // backwards
 
         HSL.setPosition(0.5);            // S4: Stop and close the claw.
         HSR.setPosition(0.7);

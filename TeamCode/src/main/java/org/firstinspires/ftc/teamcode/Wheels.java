@@ -81,7 +81,7 @@ Servos:
 
 
         BL.setPower(LPower +(2 * Left) );//controls driving motors
-        FL.setPower(LPower -(2 * Left) );
+        FL.setPower(LPower -(2 * Left) );//should control robot going forward, backward, left, and right
         BR.setPower(LPower -(2 * Left));
         FR.setPower(LPower +(2 * Left));
 
@@ -90,12 +90,11 @@ Servos:
 
 
         if(RPower != 0 || turn != 0){
-            BL.setPower(LPower -(2 * turn) );//controls driving motors
+            BL.setPower(LPower -(2 * turn) );//controls driving motors if it works correctly, it should turn when moving the right joystick
             FL.setPower(LPower -(2 * turn) );
             BR.setPower(LPower +(2 * turn));
             FR.setPower(LPower +(2 * turn));
         }
-
 
 
         telemetry.addData("Back Left", LPower );//displays info in phones
