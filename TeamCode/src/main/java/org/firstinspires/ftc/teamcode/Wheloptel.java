@@ -132,16 +132,16 @@ Servos:
         }
 
         //swivels claw
-        if(gamepad1.y && go){
+        if(gamepad2.y && go){
             pos = pos + 0.2;
             go = false;
         }
 
-        if(gamepad1.a && go){
+        if(gamepad2.a && go){
             pos = pos - 0.2;
             go = false;
         }
-        if (!gamepad1.a && !gamepad1.y){
+        if (!gamepad2.a && !gamepad1.y){
 
             if (pos > 1){
                 pos = 1;
