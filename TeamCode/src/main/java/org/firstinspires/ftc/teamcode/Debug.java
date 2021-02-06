@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "EasyAuto")
+@Autonomous(name = "Debug")
 
-public class EasyAuto extends LinearOpMode {
+public class Debug extends LinearOpMode {
     //Created Jan 30th 2021 by Sam B
 
     DcMotor A;
@@ -22,8 +22,8 @@ public class EasyAuto extends LinearOpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
-    static final double COUNTS_PER_MOTOR_REV = 1120;    // eg: TETRIX Motor Encoder
-    static final double DRIVE_GEAR_REDUCTION = .1;     // This is < 1.0 if geared UP
+    static final double COUNTS_PER_MOTOR_REV = 20;    // eg: TETRIX Motor Encoder
+    static final double DRIVE_GEAR_REDUCTION = 0.1;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
@@ -85,9 +85,9 @@ public class EasyAuto extends LinearOpMode {
 
         // Step through each leg of the path
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, 0.25, 0.25, 3.0);  // forward
+        encoderDrive(DRIVE_SPEED, 10, 10, 5.0);  // forward
         //encoderDrive(TURN_SPEED, -1, 1, 4.0);  // turn left
-        //encoderDrive(DRIVE_SPEED, 2, 2, 4.0);  // little bit forward
+        //encoderDrive(TURN_SPEED, 2, 2, 4.0);  // little bit forward
         //encoderDrive(TURN_SPEED, 1, -1, 4.0);  // turn right
         //encoderDrive(DRIVE_SPEED, 1, 1, 4.0);  // forward
         //encoderDrive(DRIVE_SPEED, -2, -2, 8.0);  // backwards
