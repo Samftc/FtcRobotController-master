@@ -85,7 +85,7 @@ public class EasyAuto extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, 30, 30, 10.0);  // forward
+        encoderDrive(DRIVE_SPEED, 30, 10, 10.0);  // forward
         encoderDrive(TURN_SPEED, -9, 9, 4.0);  // turn left
         encoderDrive(TURN_SPEED, 12, 12, 4.0);  // little bit forward
         encoderDrive(TURN_SPEED, 9, -9, 4.0);  // turn right
