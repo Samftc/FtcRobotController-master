@@ -36,7 +36,7 @@ public class Wheloptel extends OpMode {
         telemetry.addData("Mode:", "done initializing");
         telemetry.update();
 
-//crossroads is password
+//crossroads is password to control hub
           /* Motors:
   back_right_motor
   front_right_motor
