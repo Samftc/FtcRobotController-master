@@ -22,7 +22,7 @@ public class EasyAuto extends LinearOpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
-    static final double COUNTS_PER_MOTOR_REV = 1120;    // eg: TETRIX Motor Encoder
+    static final double COUNTS_PER_MOTOR_REV = 120;    // eg: TETRIX Motor Encoder
     static final double DRIVE_GEAR_REDUCTION = .1;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
@@ -85,7 +85,7 @@ public class EasyAuto extends LinearOpMode {
 
         // Step through each leg of the path
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, 0.25, 0.25, 3.0);  // forward
+        encoderDrive(DRIVE_SPEED, 1, 1, 3.0);  // forward
         //encoderDrive(TURN_SPEED, -1, 1, 4.0);  // turn left
         //encoderDrive(DRIVE_SPEED, 2, 2, 4.0);  // little bit forward
         //encoderDrive(TURN_SPEED, 1, -1, 4.0);  // turn right
