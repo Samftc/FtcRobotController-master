@@ -44,6 +44,10 @@ public class EasyAuto extends LinearOpMode {
         HSR = hardwareMap.servo.get("hand_servo_right");
         HS = hardwareMap.servo.get("hand_servo");
 
+        //close claw
+        HSL.setPosition(0.0); //sets the servo to closed
+        HSR.setPosition(1);
+
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //

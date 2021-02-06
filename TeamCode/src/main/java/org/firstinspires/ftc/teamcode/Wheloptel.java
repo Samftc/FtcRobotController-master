@@ -121,11 +121,13 @@ Servos:
 
         A.setPower(up - down);
 
+        //open claw
         if(gamepad2.x){
             HSL.setPosition(0.8); //sets the servo to open
             HSR.setPosition(0.2);
 
         }
+        //close claw
         if(gamepad2.b){
             HSL.setPosition(0.0); //sets the servo to closed
             HSR.setPosition(1);
