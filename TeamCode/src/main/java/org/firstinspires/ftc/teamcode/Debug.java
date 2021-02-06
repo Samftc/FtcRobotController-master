@@ -22,13 +22,13 @@ public class Debug extends LinearOpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
-    static final double COUNTS_PER_MOTOR_REV = 20;    // eg: TETRIX Motor Encoder
-    static final double DRIVE_GEAR_REDUCTION = 0.1;     // This is < 1.0 if geared UP
+    static final double COUNTS_PER_MOTOR_REV = 1120;    // eg: TETRIX Motor Encoder
+    static final double DRIVE_GEAR_REDUCTION = 2.0;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double DRIVE_SPEED = 0.6;
-    static final double TURN_SPEED = 0.5;
+    static final double DRIVE_SPEED = 0.3;
+    static final double TURN_SPEED = 0.25;
 
 
     @Override
@@ -49,8 +49,8 @@ public class Debug extends LinearOpMode {
         telemetry.addData("Status", "Resetting Encoders");    //
         telemetry.update();
 
-        FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
+        FR.setDirection(DcMotorSimple.Direction.REVERSE);
 
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -83,14 +83,11 @@ public class Debug extends LinearOpMode {
         waitForStart();
 
 
-        // Step through each leg of the path
+        // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, 10, 10, 5.0);  // forward
-        //encoderDrive(TURN_SPEED, -1, 1, 4.0);  // turn left
-        //encoderDrive(TURN_SPEED, 2, 2, 4.0);  // little bit forward
-        //encoderDrive(TURN_SPEED, 1, -1, 4.0);  // turn right
-        //encoderDrive(DRIVE_SPEED, 1, 1, 4.0);  // forward
-        //encoderDrive(DRIVE_SPEED, -2, -2, 8.0);  // backwards
+        encoderDrive(DRIVE_SPEED, 48, 48, 1.5);  // S1: Forward 47 Inches with 5 Sec timeout
+      //  encoderDrive(TURN_SPEED, 12, -12, .5);  // S2: Turn Right 12 Inches with 4 Sec timeout
+       // encoderDrive(DRIVE_SPEED, -24, -24, .5);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         HSL.setPosition(0.5);            // S4: Stop and close the claw.
         HSR.setPosition(0.7);
@@ -98,6 +95,7 @@ public class Debug extends LinearOpMode {
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
+
 
     }
 
@@ -134,7 +132,7 @@ public class Debug extends LinearOpMode {
             BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            // reset the timeout time and start motion.s
+            // reset the timeout time and start motion.
             runtime.reset();
             FL.setPower(Math.abs(speed));
             FR.setPower(Math.abs(speed));
