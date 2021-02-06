@@ -1,19 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp (name =  "Pushbot: Teleop Tank", group ="Pushbot")
+@TeleOp (name =  "Omni", group ="Pushbot")
+@Disabled
 public class Omni extends OpMode {
 
     //@Disabled can be uncommented below to disable the OpMode
-//@Disable
+
     //public variable definitions
 
 
         //hardware definitions
-        public DcMotor LF = null;
+public DcMotor LF = null;
         public DcMotor LB = null;
         public DcMotor RF = null;
         public DcMotor RB = null;
