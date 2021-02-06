@@ -116,27 +116,26 @@ Servos:
 
 
 
-        up = gamepad1.right_trigger;
-        down = gamepad1.left_trigger;
+        up = gamepad2.right_trigger;
+        down = gamepad2.left_trigger;
 
         A.setPower(up - down);
 
-        if(gamepad1.x){
+        if(gamepad2.x){
             HSL.setPosition(0.8); //sets the servo to open
             HSR.setPosition(0.2);
 
         }
-        if(gamepad1.b){
+        if(gamepad2.b){
             HSL.setPosition(0.0); //sets the servo to closed
             HSR.setPosition(1);
         }
 
-
+        //swivels claw
         if(gamepad1.y && go){
             pos = pos + 0.2;
             go = false;
         }
-
 
         if(gamepad1.a && go){
             pos = pos - 0.2;
@@ -152,6 +151,7 @@ Servos:
             }
 
             go = true;
+            //ends claw swivel
         }
 
 
