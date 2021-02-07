@@ -69,7 +69,7 @@ Servos:
         HSR.setPosition(0.1);
 
 */
-        pos = 0;
+        pos = HS.getPosition();
 
     }
 
