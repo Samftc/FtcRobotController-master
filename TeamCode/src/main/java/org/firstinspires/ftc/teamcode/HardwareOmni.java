@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -41,14 +42,25 @@ public class HardwareOmni
         FL = hwMap.get(DcMotor.class, "front_left_motor");
         BL = hwMap.get(DcMotor.class, "back_left_motor");
 
+        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+        BR.setDirection(DcMotorSimple.Direction.REVERSE);
 
-       /* BR = hardwareMap.dcMotor.get("back_right_motor");
-        FR = hardwareMap.dcMotor.get("front_right_motor");
-        A = hardwareMap.dcMotor.get("arm_motor");
-        FL = hardwareMap.dcMotor.get("front_left_motor");
-        BL = hardwareMap.dcMotor.get("back_left_motor");
-        HSL = hardwareMap.servo.get("hand_servo_left");
-        HSR = hardwareMap.servo.get("hand_servo_right");
-        HS = hardwareMap.servo.get("hand_servo"); */
+        BR.setPower(0);
+        FR.setPower(0);
+        A.setPower(0);
+        FL.setPower(0);
+        BL.setPower(0);
+
+        BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        A.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        // Define and initialize ALL installed servos.
+        HSL = hwMap.get(Servo.class, "hand_servo_left");
+        HSR = hwMap.get(Servo.class, "hand_servo_right");
+        HSL.setPosition(MID_SERVO);
+        HSR.setPosition(MID_SERVO);
     }
 }
