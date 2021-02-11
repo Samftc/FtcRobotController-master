@@ -16,12 +16,15 @@ public class ScratchAuto extends LinearOpMode {
     HardwareOmni    robot   = new HardwareOmni();   //Uses the motors and stuff in the class HardwareOmni
     private ElapsedTime runtime = new ElapsedTime();
 
-    static final double DriveSpeed = 0;
+    static final double DriveSpeed = 0.01;
 
-    double FRpos = 0;
-    double FLpos = 0;
-    double BLpos = 0;
-    double BRpos = 0;
+
+    int FRpos = 0;
+    int FLpos = 0;
+    int BLpos = 0;
+    int BRpos = 0;
+
+    
 
 
 
@@ -51,7 +54,7 @@ public class ScratchAuto extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        ForwardDrive(DriveSpeed, 48 , 48, 48, 48, 5);
+        ForwardDrive(DriveSpeed, 10 , 10, 10, 10, 5);
     }
 
     private void ForwardDrive(double speed, double FR, double FL, double BR, double BL, double StopTime) {
@@ -61,10 +64,10 @@ public class ScratchAuto extends LinearOpMode {
             int BRTarget;
             int BLTarget;
 
-            FRTarget = robot.FR.getCurrentPosition() + (int) (FR)*1000;
-            FLTarget = robot.FL.getCurrentPosition() + (int) (FL)*1000;
-            BRTarget = robot.BR.getCurrentPosition() + (int) (BR)*1000;
-            BLTarget = robot.BL.getCurrentPosition() + (int) (BL)*1000;
+           FRTarget = robot.FR.getCurrentPosition() + (int) (FR)*-50;
+            FLTarget = robot.FL.getCurrentPosition() + (int) (FL)*-50;
+            BRTarget = robot.BR.getCurrentPosition() + (int) (BR)*-50;
+            BLTarget = robot.BL.getCurrentPosition() + (int) (BL)*-50;
             robot.FR.setTargetPosition(FRTarget);
             robot.BR.setTargetPosition(BRTarget);
             robot.FL.setTargetPosition(FLTarget);
@@ -76,23 +79,23 @@ public class ScratchAuto extends LinearOpMode {
             robot.BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
-            runtime.reset();
-            robot.FR.setPower(Math.abs(speed));
-            robot.FL.setPower(Math.abs(speed));
-            robot.BR.setPower(Math.abs(speed));
-            robot.BL.setPower(Math.abs(speed));
-            while (opModeIsActive() &&
+           runtime.reset();
+            robot.FR.setPower(DriveSpeed);
+            robot.FL.setPower(DriveSpeed);
+            robot.BR.setPower(DriveSpeed);
+            robot.BL.setPower(DriveSpeed);
+           while (opModeIsActive() &&
                     (runtime.seconds() < StopTime) &&
                     (robot.FR.isBusy() && robot.FL.isBusy() && robot.BR.isBusy() && robot.BL.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d", FRTarget,  FLTarget, BRTarget, BLTarget);
+               telemetry.addData("Path1",  "Running to %7d :%7d", FRTarget,  FLTarget, BRTarget, BLTarget);
                 telemetry.addData("Path2",  "Running at %7d :%7d",
                         robot.FR.getCurrentPosition(),
                         robot.FL.getCurrentPosition(),
                         robot.BL.getCurrentPosition(),
                         robot.BR.getCurrentPosition());
-                telemetry.update();
+               telemetry.update();
             }
 
             // Stop all motion;
