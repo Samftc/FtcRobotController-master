@@ -143,7 +143,7 @@ Servos:
             pos = pos - 0.2;
             go = false;
         }
-        if (!gamepad2.a && !gamepad1.y){
+        if (!gamepad2.a && !gamepad2.y){
 
             if (pos > 1){
                 pos = 1;
@@ -155,15 +155,6 @@ Servos:
             go = true;
             //ends claw swivel
         }
-
-
-
-
-
-
-
-
-
 
         telemetry.addData("Back Left", LPower +(2 * Left) );//displays info in phones
         telemetry.addData("Front Left",LPower -(2 * Left) );

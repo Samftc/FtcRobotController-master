@@ -64,14 +64,14 @@ public class ScratchAuto extends LinearOpMode {
             int BRTarget;
             int BLTarget;
 
-           FRTarget = robot.FR.getCurrentPosition() + (int) (FR)*-50;
-            FLTarget = robot.FL.getCurrentPosition() + (int) (FL)*-50;
-            BRTarget = robot.BR.getCurrentPosition() + (int) (BR)*-50;
-            BLTarget = robot.BL.getCurrentPosition() + (int) (BL)*-50;
-            robot.FR.setTargetPosition(FRTarget);
-            robot.BR.setTargetPosition(BRTarget);
-            robot.FL.setTargetPosition(FLTarget);
-            robot.BL.setTargetPosition(BLTarget);
+           FRTarget = robot.FR.getCurrentPosition() + (int) (FR)*50;
+            FLTarget = robot.FL.getCurrentPosition() + (int) (FL)*50;
+            BRTarget = robot.BR.getCurrentPosition() + (int) (BR)*50;
+            BLTarget = robot.BL.getCurrentPosition() + (int) (BL)*50;
+            robot.FR.setTargetPosition(-FRTarget);
+            robot.BR.setTargetPosition(-BRTarget);
+            robot.FL.setTargetPosition(-FLTarget);
+            robot.BL.setTargetPosition(-BLTarget);
 
             robot.FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -80,10 +80,10 @@ public class ScratchAuto extends LinearOpMode {
 
             // reset the timeout time and start motion.
            runtime.reset();
-            robot.FR.setPower(DriveSpeed);
-            robot.FL.setPower(DriveSpeed);
-            robot.BR.setPower(DriveSpeed);
-            robot.BL.setPower(DriveSpeed);
+            robot.FR.setPower(0.01);
+            robot.FL.setPower(0.01);
+            robot.BR.setPower(0.01);
+            robot.BL.setPower(0.01);
            while (opModeIsActive() &&
                     (runtime.seconds() < StopTime) &&
                     (robot.FR.isBusy() && robot.FL.isBusy() && robot.BR.isBusy() && robot.BL.isBusy())) {
@@ -96,6 +96,8 @@ public class ScratchAuto extends LinearOpMode {
                         robot.BL.getCurrentPosition(),
                         robot.BR.getCurrentPosition());
                telemetry.update();
+
+
             }
 
             // Stop all motion;
