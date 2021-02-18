@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous
 //Disabled
-public class MOTOR extends LinearOpMode {
+public class CompetetionCode extends LinearOpMode {
 
 
     double time;//declares variables
@@ -20,33 +20,21 @@ public class MOTOR extends LinearOpMode {
     @Override
     public void runOpMode(){
 
-        rob.init(hardwareMap);// starts using hardware omni
-        rob.FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);//resets encoders so they say zero
-        rob.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rob.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rob.BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        rob.BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);//motors don't run with encoders, but it is still possible to read the encoders
-        rob.FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rob.A.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rob.FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rob.BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        rob.BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);// when the motor is not moving it automatically breaks
-        rob.FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rob.FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rob.BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rob.A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
         waitForStart();//wait for the start
 
+        rob.init(hardwareMap);// starts using hardware omni
+        RESET();
+
+
+
+
         position = -1 *(rob.FL.getCurrentPosition() + rob.FR.getCurrentPosition() //position is equal to the position of all of the motors combined
+                //Position is gotten from the encoder positions of the motors
                 + rob.BR.getCurrentPosition() + rob.BL.getCurrentPosition());
 
         TurnPosition =   -1*(rob.FL.getCurrentPosition() + rob.BR.getCurrentPosition()) + rob.BL.getCurrentPosition() + rob.FR.getCurrentPosition();
-// Just FL and BL
+        // is basically the exact same as position, but it is Just the Front Left and Back Left motors
+            //If it was using position code while turning, the motors that would turn the other way would interfere with each other
 
         time = getRuntime();// gets the runtime
 
@@ -54,88 +42,58 @@ public class MOTOR extends LinearOpMode {
 
 
 
-
-
-
-        while (time < 10 && position <= 10000 && opModeIsActive()){//while the time is less than 10 seconds
-            // and the position of motors is less than 1,0000  and the op mode is active, drive forward
+        while (time < 10 && position <= 10000 && opModeIsActive()){//while time is less and position is less than assigned number, the code runs
             DriveForward(); //function that runs code which makes the robot go forward
         }
 
-        BREAK(); //stops movement
+        ALL();//runs both BREAK sleep and RESET functions and code
 
-
-        sleep(2000); //stops code for certain time
-
-
-        RESET(); //resets encoders and runtime to zero
-
-        while (time < 10 && position >= -500 && opModeIsActive()){//while time is less and position is less than assigned number, the code runs
+        while (time < 10 && position >= -500 && opModeIsActive()){
             Backwards();//the robot goes backwards
         }
 
-        BREAK(); //stops movement
-
-
-        sleep(2000); //stops code for certain time
-
-
-        RESET();
-
-
+        ALL();
 
 
         while (time < 10 && TurnPosition >= -5000 && opModeIsActive()){
 
-            LeftTurn();
+            LeftTurn();//the robot turns left
 
 
         }
 
-        BREAK(); //stops movement
-
-
-        sleep(2000); //stops code for certain time
-
-
-        RESET();
+       ALL();
 
 
         while (time < 10 && position <= 10000 && opModeIsActive()){
-            DriveForward();
+            DriveForward();//the robot goes forward
         }
 
 
-
-        sleep(2000); //stops code for certain time
-
-
-        RESET();
-
-
-
-        BREAK();
-
+       ALL();
 
 
         //robot should be near the wall in this part, now there should be code to score a few points and then back up
 
         while (time < 10 && position >= -10000 && opModeIsActive()){
-            Backwards();
+            Backwards();//robot goes backwards
         }
 
-        BREAK(); //stops movement
-
-
-        sleep(2000); //stops code for certain time
-
-
-        RESET();
+        ALL();
 
 
     }
 
-    private void RESET() {
+    private void ALL() { //contains BREAK sleep and RESET code
+        BREAK(); //stops movement
+
+        sleep(2000); //stops code for certain time
+
+        RESET(); //resets encoders and runtime to zero
+
+    }
+
+    private void RESET() {//sets encoders and runtime to zero
         rob.FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);//resets encoders so they say zero
         rob.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rob.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -154,15 +112,15 @@ public class MOTOR extends LinearOpMode {
         rob.BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rob.A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        resetStartTime();
-        time = getRuntime();
+        resetStartTime();//resets runtime
+        time = getRuntime();// now equal to zero
 
 
     }
 
-    private void LeftTurn() {
-        rob.FL.setPower(-0.5);
-        rob.FR.setPower(0.5);
+    private void LeftTurn() {//the robot moves left
+        rob.FL.setPower(-0.5);//sets power of the motors
+        rob.FR.setPower(0.5);//motors must turn in a specific way to make the robot go directly left
         rob.BR.setPower(-0.5);
         rob.BL.setPower(0.5);
 
@@ -232,6 +190,20 @@ public class MOTOR extends LinearOpMode {
         rob.FR.setPower(1);
         rob.BR.setPower(1);
         rob.BL.setPower(1);
+
+        time = getRuntime();
+
+        position = -1 *(rob.FL.getCurrentPosition() + rob.FR.getCurrentPosition()
+                + rob.BR.getCurrentPosition() + rob.BL.getCurrentPosition());
+
+
+
+        telemetry.addData("Position", position);
+        telemetry.addData("FL",rob.FL.getCurrentPosition());
+        telemetry.addData("FR",rob.FR.getCurrentPosition());
+        telemetry.addData("BR",rob.BR.getCurrentPosition());
+        telemetry.addData("BL",rob.BL.getCurrentPosition());
+        telemetry.update();
     }
 
     private void BREAK() {
