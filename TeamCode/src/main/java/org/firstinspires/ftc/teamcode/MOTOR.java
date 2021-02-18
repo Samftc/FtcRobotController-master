@@ -10,17 +10,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class MOTOR extends LinearOpMode {
 
 
-    double time;
+    double time;//declares variables
     double position;
 
     double TurnPosition;
 
 
-    HardwareOmni rob = new HardwareOmni();
+    HardwareOmni rob = new HardwareOmni();//uses setup from Hardware Omni
     @Override
     public void runOpMode(){
 
-        rob.init(hardwareMap);
+        rob.init(hardwareMap);// starts using hardware omni
         rob.FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);//resets encoders so they say zero
         rob.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rob.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -40,7 +40,7 @@ public class MOTOR extends LinearOpMode {
         rob.A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        waitForStart();
+        waitForStart();//wait for the start
 
         position = -1 *(rob.FL.getCurrentPosition() + rob.FR.getCurrentPosition() //position is equal to the position of all of the motors combined
                 + rob.BR.getCurrentPosition() + rob.BL.getCurrentPosition());
@@ -48,7 +48,7 @@ public class MOTOR extends LinearOpMode {
         TurnPosition =   -1*(rob.FL.getCurrentPosition() + rob.BR.getCurrentPosition()) + rob.BL.getCurrentPosition() + rob.FR.getCurrentPosition();
 // Just FL and BL
 
-        time = getRuntime();
+        time = getRuntime();// gets the runtime
 
 
 
@@ -57,8 +57,9 @@ public class MOTOR extends LinearOpMode {
 
 
 
-        while (time < 10 && position <= 10000 && opModeIsActive()){
-            DriveForward();
+        while (time < 10 && position <= 10000 && opModeIsActive()){//while the time is less than 10 seconds
+            // and the position of motors is less than 1,0000  and the op mode is active, drive forward
+            DriveForward(); //function that runs code which makes the robot go forward
         }
 
         BREAK(); //stops movement
@@ -67,10 +68,10 @@ public class MOTOR extends LinearOpMode {
         sleep(2000); //stops code for certain time
 
 
-        RESET();
+        RESET(); //resets encoders and runtime to zero
 
-        while (time < 10 && position >= -500 && opModeIsActive()){
-            Backwards();
+        while (time < 10 && position >= -500 && opModeIsActive()){//while time is less and position is less than assigned number, the code runs
+            Backwards();//the robot goes backwards
         }
 
         BREAK(); //stops movement
@@ -85,7 +86,6 @@ public class MOTOR extends LinearOpMode {
 
 
         while (time < 10 && TurnPosition >= -5000 && opModeIsActive()){
-
 
             LeftTurn();
 
