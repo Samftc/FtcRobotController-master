@@ -9,10 +9,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 //Disabled
 public class CompetetionCode extends LinearOpMode {
 
-
+    /**ticks per revolution for the neverest 40:1 gearmotor is 1120
+    diameter of the wheels is 4 inches
+    the circumference of the wheel is 2*3.1416*2 = 12.57
+    therefore one revolution, which is 1120 ticks travels 12.57 inches
+    the robot must travel 64 inches to land on the line
+    The position must be equal to 1120 * 5.09 to get on the line
+    position == 5,702 **/
     double time;//declares variables
     double position;
 
+    double Armpos;
     double TurnPosition;
 
 
@@ -22,8 +29,11 @@ public class CompetetionCode extends LinearOpMode {
 
         waitForStart();//wait for the start
 
+
         rob.init(hardwareMap);// starts using hardware omni
         RESET();
+        rob.HSL.setPosition(0.1); //sets the servo to closed
+        rob.HSR.setPosition(0.9);
 
 
 
@@ -42,38 +52,50 @@ public class CompetetionCode extends LinearOpMode {
 
 
 
-        while (time < 10 && position <= 10000 && opModeIsActive()){//while time is less and position is less than assigned number, the code runs
+        while (time < 10 && position <= 12500 && opModeIsActive()){//while time is less and position is less than assigned number, the code runs
             DriveForward(); //function that runs code which makes the robot go forward
+
+
         }
-
+        /*
         ALL();//runs both BREAK sleep and RESET functions and code
+        rob.A.setPower(0);
 
-        while (time < 10 && position >= -500 && opModeIsActive()){
+      while (time < 0.1 && position >= -200 && opModeIsActive()){
             Backwards();//the robot goes backwards
         }
 
         ALL();
 
 
-        while (time < 10 && TurnPosition >= -5000 && opModeIsActive()){
+        while (time < 0.1 && TurnPosition >= -500 && opModeIsActive()){
 
             LeftTurn();//the robot turns left
 
 
         }
 
+
        ALL();
 
+        rob.A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Armpos = rob.A.getCurrentPosition();
 
         while (time < 10 && position <= 10000 && opModeIsActive()){
             DriveForward();//the robot goes forward
+
         }
 
+        rob.A.setPower(0);
+        rob.HS.setPosition(0);
+        rob.HSL.setPosition(1);
+        rob.HSR.setPosition(0);
 
        ALL();
 
 
         //robot should be near the wall in this part, now there should be code to score a few points and then back up
+
 
         while (time < 10 && position >= -10000 && opModeIsActive()){
             Backwards();//robot goes backwards
@@ -81,13 +103,53 @@ public class CompetetionCode extends LinearOpMode {
 
         ALL();
 
+        */
+    }
+
+    private void DriveForwardANDArm() {
+        rob.FL.setPower(0.5);
+        rob.FR.setPower(0.5);
+        rob.BR.setPower(0.5);
+        rob.BL.setPower(0.5);
+
+
+
+
+        time = getRuntime();
+
+        position = -1 *(rob.FL.getCurrentPosition() + rob.FR.getCurrentPosition()
+                + rob.BR.getCurrentPosition() + rob.BL.getCurrentPosition());
+
+
+
+
+
+
+        rob.HS.setPosition(0);
+
+        Armpos = rob.A.getCurrentPosition();
+        if(Armpos <= 1000){
+            rob.A.setPower(1);
+        }
+        else {
+            rob.A.setPower(0);
+        }
+
+
+        telemetry.addData("Position", position);
+        telemetry.addData("FL",rob.FL.getCurrentPosition());
+        telemetry.addData("FR",rob.FR.getCurrentPosition());
+        telemetry.addData("BR",rob.BR.getCurrentPosition());
+        telemetry.addData("BL",rob.BL.getCurrentPosition());
+        telemetry.addData("A",rob.A.getCurrentPosition());
+        telemetry.update();
 
     }
 
     private void ALL() { //contains BREAK sleep and RESET code
         BREAK(); //stops movement
 
-        sleep(2000); //stops code for certain time
+        sleep(1000); //stops code for certain time
 
         RESET(); //resets encoders and runtime to zero
 
@@ -98,7 +160,7 @@ public class CompetetionCode extends LinearOpMode {
         rob.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rob.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rob.BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
+        rob.A.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rob.BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);//motors don't run with encoders, but it is still possible to read the encoders
         rob.FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

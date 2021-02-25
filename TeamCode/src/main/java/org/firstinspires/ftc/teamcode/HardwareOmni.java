@@ -42,6 +42,7 @@ public class HardwareOmni
         FL = hwMap.get(DcMotor.class, "front_left_motor");
         BL = hwMap.get(DcMotor.class, "back_left_motor");
 
+
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -60,6 +61,7 @@ public class HardwareOmni
         // Define and initialize ALL installed servos.
         HSL = hwMap.get(Servo.class, "hand_servo_left");
         HSR = hwMap.get(Servo.class, "hand_servo_right");
+        HS = hwMap.get(Servo.class, "hand_servo");
       /*  HSL.setPosition(MID_SERVO);
         HSR.setPosition(MID_SERVO);     */
     }
