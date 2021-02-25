@@ -57,9 +57,8 @@ public class CompetetionCode extends LinearOpMode {
 
 
         }
-        /*
+
         ALL();//runs both BREAK sleep and RESET functions and code
-        rob.A.setPower(0);
 
       while (time < 0.1 && position >= -200 && opModeIsActive()){
             Backwards();//the robot goes backwards
@@ -78,8 +77,12 @@ public class CompetetionCode extends LinearOpMode {
 
        ALL();
 
-        rob.A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Armpos = rob.A.getCurrentPosition();
+        while(time < 2){
+            arm();
+        }
+        rob.A.setPower(0);
+
+
 
         while (time < 10 && position <= 10000 && opModeIsActive()){
             DriveForward();//the robot goes forward
@@ -103,7 +106,14 @@ public class CompetetionCode extends LinearOpMode {
 
         ALL();
 
-        */
+
+    }
+
+    private void arm() {
+        rob.A.setPower(0.5);
+
+        time = getRuntime();
+
     }
 
     private void DriveForwardANDArm() {
