@@ -67,7 +67,7 @@ public class CompetetionCode extends LinearOpMode {
         ALL();
 
 
-        while (time < 0.1 && TurnPosition >= -500 && opModeIsActive()){
+        while (time < 10 && TurnPosition >= -4000 && opModeIsActive()){
 
             LeftTurn();//the robot turns left
 
@@ -75,22 +75,43 @@ public class CompetetionCode extends LinearOpMode {
         }
 
 
+
        ALL();
 
-        while(time < 2){
+        while(time < 2.5){
             arm();
+            rob.HS.setPosition(0);
+
+
         }
         rob.A.setPower(0);
 
 
 
-        while (time < 10 && position <= 10000 && opModeIsActive()){
+        while (time < 10 && position <= 4000 && opModeIsActive()){
             DriveForward();//the robot goes forward
 
         }
 
+        ALL();
+
+
+        while (time < 10 && TurnPosition <= 2000 && opModeIsActive()) {
+
+            RightTurn();
+
+        }
+
+        ALL();
+
+        while (time < 10 && position <= 5000 && opModeIsActive()){
+            DriveForward();//the robot goes forward
+
+        }
+
+
         rob.A.setPower(0);
-        rob.HS.setPosition(0);
+
         rob.HSL.setPosition(1);
         rob.HSR.setPosition(0);
 
@@ -100,7 +121,29 @@ public class CompetetionCode extends LinearOpMode {
         //robot should be near the wall in this part, now there should be code to score a few points and then back up
 
 
-        while (time < 10 && position >= -10000 && opModeIsActive()){
+        while (time < 10 && position >= -4000 && opModeIsActive()){
+            Backwards();//robot goes backwards
+        }
+
+        ALL();
+
+
+
+
+        while (time < 10 && TurnPosition >= -4000 && opModeIsActive()){
+
+            LeftTurn();//the robot turns left
+
+
+        }
+
+        ALL();
+
+
+
+
+
+        while (time < 10 && position >= -4500 && opModeIsActive()){
             Backwards();//robot goes backwards
         }
 
@@ -288,8 +331,8 @@ public class CompetetionCode extends LinearOpMode {
 
     private void DriveForward() {
         rob.FL.setPower(0.5);
-        rob.FR.setPower(0.5);
-        rob.BR.setPower(0.5);
+        rob.FR.setPower(0.45);
+        rob.BR.setPower(0.45);
         rob.BL.setPower(0.5);
 
 
